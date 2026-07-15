@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Home
+title: Louis Durston-Wyatt
 ---
 
-# Louis Durston-Wyatt
+# Home
 
 ![Me](./purple_photie.jpg)
 
