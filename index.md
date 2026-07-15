@@ -10,9 +10,7 @@ title: Home
 ## About me
 
 I am a Mathematics student at Durham University, interested in Mathematical Biology,
-Fluid Mechanics, and Machine Learning.
-
-[CV]()
+Fluid Mechanics, and Machine Learning. Here's my [CV]().
 
 ## Academic Projects
 
@@ -22,6 +20,5 @@ Fluid Mechanics, and Machine Learning.
 
 ## Personal Projects
 
-- [Orbit3D]()
-- [Mandelbrot Generator]()
+- [Orbit3D](https://louisdw.itch.io/orbit3d)
 
