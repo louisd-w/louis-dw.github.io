@@ -10,7 +10,7 @@ title: Home
 ## About me
 
 I am a Mathematics student at Durham University, interested in Mathematical Biology,
-Fluid Mechanics, and Machine Learning. Here's my [CV]().
+Fluid Mechanics, and Machine Learning. Here's my [LinkedIn](https://www.linkedin.com/in/louis-durston-wyatt-a529b03b7/) and my [CV]().
 
 ## Academic Projects
 
