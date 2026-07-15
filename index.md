@@ -15,10 +15,13 @@ Fluid Mechanics, and Machine Learning.
 ## Academic Projects
 
 - [Microbial Coexistence summer research project]()
-- [A Reasoning-led Approach to Teaching Fractions]()
+- [A Reasoning-led Approach to Teaching Fractions](./Louis Durston Project Report.pdf)
 - [Dissertation Project]()
 
 ## Personal Projects
 
 - [Orbit3D]()
 - [Mandelbrot Generator]()
+
+## Other
+- [CV]()
