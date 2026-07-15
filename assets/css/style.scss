@@ -1,0 +1,85 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* ---------- Your colour palette ---------- */
+
+:root {
+  --banner-left: #1f4e5f;
+  --banner-right: #397f8f;
+
+  --page-background: #ffffff;
+  --body-text: #333333;
+  --heading-text: #1f6173;
+  --link-text: #287d92;
+
+  --banner-text: #ffffff;
+
+  --button-background: rgba(255, 255, 255, 0.12);
+  --button-border: rgba(255, 255, 255, 0.45);
+  --button-hover: rgba(255, 255, 255, 0.28);
+
+  --footer-text: #666666;
+}
+
+/* ---------- Main page ---------- */
+
+body {
+  color: var(--body-text);
+  background-color: var(--page-background);
+}
+
+/* ---------- Banner ---------- */
+
+.page-header {
+  color: var(--banner-text);
+  background-color: var(--banner-left);
+  background-image: linear-gradient(
+    120deg,
+    var(--banner-left),
+    var(--banner-right)
+  );
+}
+
+.project-name,
+.project-tagline {
+  color: var(--banner-text);
+}
+
+/* ---------- Page headings ---------- */
+
+.main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content h4,
+.main-content h5,
+.main-content h6 {
+  color: var(--heading-text);
+}
+
+/* ---------- Links ---------- */
+
+.main-content a {
+  color: var(--link-text);
+}
+
+/* ---------- Banner menu buttons ---------- */
+
+.btn {
+  color: var(--banner-text);
+  background-color: var(--button-background);
+  border-color: var(--button-border);
+}
+
+.btn:hover {
+  color: var(--banner-text);
+  background-color: var(--button-hover);
+  border-color: var(--banner-text);
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer-credits {
+  color: var(--footer-text);
+}
