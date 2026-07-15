@@ -21,5 +21,4 @@ Fluid Mechanics, and Machine Learning.
 ## Personal Projects
 
 - [Orbit3D]()
-
 - [Mandelbrot Generator]()
