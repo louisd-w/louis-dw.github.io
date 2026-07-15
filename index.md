@@ -5,12 +5,14 @@ title: Home
 
 # Louis Durston-Wyatt
 
-![Me](./IMG_1085.JPG)
+![Me](./purple_photie.JPG)
 
 ## About me
 
 I am a Mathematics student at Durham University, interested in Mathematical Biology,
 Fluid Mechanics, and Machine Learning.
+
+[CV]()
 
 ## Academic Projects
 
@@ -23,5 +25,3 @@ Fluid Mechanics, and Machine Learning.
 - [Orbit3D]()
 - [Mandelbrot Generator]()
 
-## Other
-- [CV]()
