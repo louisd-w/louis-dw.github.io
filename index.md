@@ -5,7 +5,7 @@ title: Home
 
 # Louis Durston-Wyatt
 
-![Me](purple_photo.jpg)
+![Me](./purple_photo.JPG)
 
 ## About me
 
