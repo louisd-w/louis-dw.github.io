@@ -139,19 +139,21 @@ $section-headings-color: #159957;    // headings
 @media screen and (max-width: 600px) {
   .page-header {
     min-height: 190px;
-    padding: 2.5rem 1.5rem 2rem;
+    padding: 2.5rem 1.25rem 2rem;
   }
 
   .project-name {
-    font-size: 2rem;
-    line-height: 1.15;
-    padding-right: 3.5rem;
+    max-width: 80%;
+    margin: 0 auto;
+    font-size: 1.8rem;
+    line-height: 1.1;
   }
 
   .project-tagline {
-    font-size: 1.25rem;
-    line-height: 1.4;
-    margin-top: 1rem;
+    max-width: 90%;
+    margin: 1.25rem auto 0;
+    font-size: 1.15rem;
+    line-height: 1.35;
   }
 
   .banner-menu {
