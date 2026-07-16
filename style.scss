@@ -1,6 +1,16 @@
 ---
 ---
 
+/* Your main colour settings */
+
+$header-bg-color: #7D83FF;           // right side of banner
+$header-bg-color-secondary: #80203D; // left side of banner
+$header-heading-color: #ffffff;      // banner text
+
+$body-text-color: #333333;           // normal text
+$body-link-color: #C2F9BB;           // links
+$section-headings-color: #C2F9BB;    // headings
+
 @import "{{ site.theme }}";
 
 /* Allow the menu to be positioned within the banner */
@@ -11,7 +21,7 @@
 /* Menu container */
 .banner-menu {
   position: absolute;
-  top: 1rem;
+  top: 1.25rem;
   right: 1.5rem;
   z-index: 10;
   text-align: left;
