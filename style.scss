@@ -136,11 +136,22 @@ $section-headings-color: #159957;    // headings
   background-color: #eeeeee;
 }
 
-/* Slightly tighter positioning on phones */
 @media screen and (max-width: 600px) {
   .page-header {
-    min-height: 165px;
-    padding: 1.25rem 3.5rem 1.25rem 1rem;
+    min-height: 190px;
+    padding: 2.5rem 1.5rem 2rem;
+  }
+
+  .project-name {
+    font-size: 2rem;
+    line-height: 1.15;
+    padding-right: 3.5rem;
+  }
+
+  .project-tagline {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    margin-top: 1rem;
   }
 
   .banner-menu {
