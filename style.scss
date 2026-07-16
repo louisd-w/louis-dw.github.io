@@ -3,13 +3,13 @@
 
 /* Your main colour settings */
 
-$header-bg-color: #533747;           // right side of banner
+$header-bg-color: #781D3B;           // right side of banner
 $header-bg-color-secondary: #1E6BB8; // left side of banner
 $header-heading-color: #ffffff;      // banner text
 
 $body-text-color: #333333;           // normal text
-$body-link-color: #6f42c1;           // links
-$section-headings-color: #6f42c1;    // headings
+$body-link-color: #1E6BB8;           // links
+$section-headings-color: #159957;    // headings
 
 @import "{{ site.theme }}";
 
