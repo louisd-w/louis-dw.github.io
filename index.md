@@ -5,7 +5,7 @@ title: Louis Durston-Wyatt
 
 # Home
 
-![Me](./purple_photie.jpg)
+![Me](./images/purple_photie.jpg)
 
 ## About me
 
