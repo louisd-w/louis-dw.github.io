@@ -4,3 +4,7 @@ theme: jekyll-theme-cayman
 
 url: "https://louisdw.xyz"
 baseurl: ""
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
