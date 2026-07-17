@@ -3,7 +3,7 @@ layout: default
 title: Louis Durston-Wyatt
 ---
 
-# Louis Durston-Wyatt | Mathematics at Durham University
+# Home
 
 ![Me](./images/purple_photie.jpg)
 
