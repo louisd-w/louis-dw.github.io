@@ -1,10 +1,21 @@
 title: Louis Durston-Wyatt
-description: Undegraduate MMath student at Durham University
+description: Undergraduate MMath student at Durham University interested in mathematical biology, fluid mechanics and machine learning.
 theme: jekyll-theme-cayman
 
 url: "https://louisdw.xyz"
 baseurl: ""
 
+logo: "/assets/images/favicon.png"
+
+author:
+  name: Louis Durston-Wyatt
+
+social:
+  name: Louis Durston-Wyatt
+  links:
+    - https://www.linkedin.com/in/louis-durston-wyatt-a529b03b7/
+    - https://github.com/louisd-w
+    
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
