@@ -3,11 +3,11 @@ layout: default
 title: Louis Durston-Wyatt
 ---
 
-# Home
+# Louis Durston-Wyatt | Mathematics at Durham University
 
 ![Me](./images/purple_photie.jpg)
 
-## About me
+## About Me
 
 I am a Mathematics student at Durham University, interested in Mathematical Biology,
 Fluid Mechanics, and Machine Learning. Here's my [Github](https://github.com/louisd-w), my [LinkedIn](https://www.linkedin.com/in/louis-durston-wyatt-a529b03b7/), and my [CV]().
