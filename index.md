@@ -16,10 +16,12 @@ image: /images/purple_photie.jpg
 
   <div class="about-text">
 
-  ## About Me
+  <h2>About Me</h2>
+
+ <p>I am a Mathematics student at Durham University, interested in Mathematical Biology,
+  Fluid Mechanics and Machine Learning. Here's my [Github](https://github.com/louisd-w), [LinkedIn](https://www.linkedin.com/in/louis-durston-wyatt-a529b03b7/) and [CV]().</p>
   
-  I am a Mathematics student at Durham University, interested in Mathematical Biology,
-  Fluid Mechanics and Machine Learning. Here's my [Github](https://github.com/louisd-w), [LinkedIn](https://www.linkedin.com/in/louis-durston-wyatt-a529b03b7/) and [CV]().
+   </div>
  </div>
 
 ## Academic Projects
