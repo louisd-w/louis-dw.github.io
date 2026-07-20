@@ -16,9 +16,8 @@ $section-headings-color: #159957;    // headings
 /* Allow the menu to be positioned within the banner */
 .page-header {
   position: relative;
-
-  min-height: 175px;
-  padding: 1.5rem 4rem;
+  min-height: 120px;
+  padding: 1rem 4rem;
 
   display: flex;
   flex-direction: column;
@@ -27,7 +26,7 @@ $section-headings-color: #159957;    // headings
   background-image: linear-gradient(
     120deg,
     #159957 0%,
-    #1E6BB8 30%,
+    #5099E2 30%,
     #D86E85 100%
   );
 }
@@ -53,7 +52,8 @@ body {
 /* Menu container */
 .banner-menu {
   position: absolute;
-  top: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
   right: 1.5rem;
   z-index: 10;
   text-align: left;
