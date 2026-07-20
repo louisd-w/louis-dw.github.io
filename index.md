@@ -2,13 +2,13 @@
 layout: default
 title: Louis Durston-Wyatt
 description: Undergraduate MMath student at Durham University
-image: /images/purple_photie.jpg
+image: /images/louis.JPEG
 ---
 
 <div class="about-section">
 
   <div class="about-photo">
-    <img src="{{ './images/purple_photie.jpg' | relative_url }}"
+    <img src="{{ './images/louis.JPEG' | relative_url }}"
          alt="Me">
   </div>
 
