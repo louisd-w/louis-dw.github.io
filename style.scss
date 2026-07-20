@@ -172,3 +172,41 @@ body {
     right: 0.75rem;
   }
 }
+
+.about-section {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin: 2rem 0;
+}
+
+.about-photo {
+  padding: 0.75rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.about-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.about-text h2 {
+  margin-top: 0;
+}
+
+@media screen and (max-width: 700px) {
+  .about-section {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .about-photo {
+    width: min(260px, 80%);
+    margin: 0 auto;
+  }
+}
