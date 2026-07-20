@@ -52,11 +52,22 @@ body {
 /* Menu container */
 .banner-menu {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 1.25rem%;
   right: 1.5rem;
   z-index: 10;
   text-align: left;
+}
+
+@media screen and (min-width: 701px) {
+  /* Menu container */
+  .banner-menu {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1.5rem;
+    z-index: 10;
+    text-align: left;
+  }
 }
 
 /* Hamburger button */
