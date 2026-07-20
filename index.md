@@ -7,12 +7,20 @@ image: /images/purple_photie.jpg
 
 # Home
 
-![Me](./images/purple_photie.jpg)
+<div class="about-section">
 
-## About Me
+  <div class="about-photo">
+    <img src="{{ './images/purple_photie.jpg' | relative_url }}"
+         alt="Me">
+  </div>
 
-I am a Mathematics student at Durham University, interested in Mathematical Biology,
-Fluid Mechanics and Machine Learning. Here's my [Github](https://github.com/louisd-w), [LinkedIn](https://www.linkedin.com/in/louis-durston-wyatt-a529b03b7/) and [CV]().
+  <div class="about-text">
+
+  ## About Me
+  
+  I am a Mathematics student at Durham University, interested in Mathematical Biology,
+  Fluid Mechanics and Machine Learning. Here's my [Github](https://github.com/louisd-w), [LinkedIn](https://www.linkedin.com/in/louis-durston-wyatt-a529b03b7/) and [CV]().
+ </div>
 
 ## Academic Projects
 
