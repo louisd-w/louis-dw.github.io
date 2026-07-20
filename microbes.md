@@ -7,9 +7,11 @@ image: /images/purple_photie.jpg
 
 # Microbes
 
+My plan for investigating the different models:
+
 ![](./images/whiteboard_plan.JPEG)
 
-I went with the model that has K as the carrying capacity.
+For (1), I went with the model that has K as the carrying capacity.
 
 ![](./images/2.JPEG)
 ![](./images/3.JPEG)
