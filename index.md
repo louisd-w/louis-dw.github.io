@@ -5,8 +5,6 @@ description: Undergraduate MMath student at Durham University
 image: /images/purple_photie.jpg
 ---
 
-# Home
-
 <div class="about-section">
 
   <div class="about-photo">
@@ -19,8 +17,8 @@ image: /images/purple_photie.jpg
   <h2>About Me</h2>
 
  <p>I am a Mathematics student at Durham University, interested in Mathematical Biology,
-  Fluid Mechanics and Machine Learning. Here's my [Github](https://github.com/louisd-w), [LinkedIn](https://www.linkedin.com/in/louis-durston-wyatt-a529b03b7/) and [CV]().</p>
-  
+  Fluid Mechanics and Machine Learning. Here's my <a href="https://github.com/louisd-w">Github</a>, <a href="https://www.linkedin.com/in/louis-durston-wyatt-a529b03b7/">LinkedIn</a> and <a href="">CV</a>.
+   
    </div>
  </div>
 
