@@ -25,7 +25,7 @@ image: /images/purple_photie.jpg
 ## Academic Projects
 
 - [A Reasoning-led Approach to Teaching Fractions](./Louis_Durston_Project_Report.pdf)
-- [Microbial Coexistence summer research project, TBD]()
+- [Microbial Coexistence summer research project](./microbes.md)
 - [Dissertation Project, TBD]()
 
 ## Personal Projects
