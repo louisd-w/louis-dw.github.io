@@ -6,5 +6,3 @@ image: /images/purple_photie.jpg
 ---
 
 # Projects
-
-![](./images/whiteboard_plan.JPEG)
