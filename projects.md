@@ -7,4 +7,4 @@ image: /images/purple_photie.jpg
 
 # Projects
 
-![Me](./images/purple_photie.jpg)
+![](./images/whiteboard_plan.jpg)
