@@ -1,1 +1,1 @@
-[]("./images/lemon.jpg")
+[](./images/lemon.WEBP)
