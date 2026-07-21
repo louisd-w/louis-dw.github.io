@@ -1,4 +1,4 @@
 
 # lemon
 
-[hi](./images/lemon.WEBP)
+![hi](./images/lemon.WEBP)
