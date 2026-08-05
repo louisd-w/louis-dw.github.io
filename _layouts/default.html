@@ -18,7 +18,8 @@
   
   <meta charset="UTF-8">
 
-  {% seo %}
+  <title>{{ page.seo_title | default: page.title | default: site.title }}</title>
+  {% seo title=false %}
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link
