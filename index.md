@@ -24,8 +24,8 @@ image: /images/louis.JPEG
 ## Academic Projects
 
 - [A Reasoning-led Approach to Teaching Fractions](./schools.pdf)
-- [Microbial Coexistence summer research project, TBC](./microbes.md)
-- [Dissertation Project, TBC](./diss.md)
+- [Microbial Coexistence summer research project, TBC](./microbes)
+- [Dissertation Project, TBC](./diss)
 
 ## Personal Projects
 
