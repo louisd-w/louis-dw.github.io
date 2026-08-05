@@ -16,8 +16,7 @@ image: /images/louis.JPEG
 
   <h2>About Me</h2>
 
- <p>I am a Mathematics student at Durham University, interested in Mathematical Biology,
-  Fluid Mechanics and Machine Learning. Here's my <a href="https://github.com/louisd-w">Github</a>, <a href="https://www.linkedin.com/in/louis-durston-wyatt-a529b03b7/">LinkedIn</a> and <a href="">CV (TBC)</a>.</p>
+ <p>I am a Mathematics student at Durham University, graduating in July 2027. My interests are Mathematical Biology, Fluid Mechanics and Machine Learning. Here's my <a href="https://github.com/louisd-w">Github</a>, <a href="https://www.linkedin.com/in/louis-durston-wyatt-a529b03b7/">LinkedIn</a> and <a href="">CV (TBC)</a>.</p>
    </div>
  </div>
  
