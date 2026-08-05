@@ -33,6 +33,4 @@ image: /images/louis.JPEG
 - [Comparing Numerical ODE solvers, TBC]()
 - [Squirrel Pox population model, VisualPDE, TBC]()
 
-## Machine Learning Portfolio
-
-- TBC
+## Machine Learning Portfolio, TBC
