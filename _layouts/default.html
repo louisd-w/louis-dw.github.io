@@ -21,6 +21,12 @@
   <title>{{ page.seo_title | default: page.title | default: site.title }}</title>
   {% seo title=false %}
 
+  <meta property="og:title"
+        content="{{ page.seo_title | default: page.title | default: site.title }}">
+  
+  <meta name="twitter:title"
+        content="{{ page.seo_title | default: page.title | default: site.title }}">
+
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link
     rel="preload"
