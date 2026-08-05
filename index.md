@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Louis Durston-Wyatt
+seo_title: Louis Durston-Wyatt | MMath at Durham University
 description: Undergraduate MMath student at Durham University
 image: /images/louis.JPEG
 ---
