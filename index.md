@@ -22,7 +22,7 @@ image: /assets/images/louis.JPEG
  
 ## Academic Projects
 
-- [A Reasoning-led Approach to Teaching Fractions](.assets/files/schools.pdf)
+- [A Reasoning-led Approach to Teaching Fractions](./assets/files/schools.pdf)
 - [Microbial Coexistence summer research project, TBC](./microbes)
 - [Dissertation Project, TBC](./diss)
 
