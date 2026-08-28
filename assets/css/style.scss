@@ -209,13 +209,20 @@ body {
 }
 
 @media screen and (max-width: 700px) {
+
   .about-section {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
   .about-photo {
-    width: min(260px, 80%);
+    width: 95%;
     margin: 0 auto;
+  }
+
+  .about-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 }
