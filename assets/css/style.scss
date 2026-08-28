@@ -185,6 +185,11 @@ body {
   margin: 2rem 0 0;
 }
 
+/* to fix spacing before academic projects */
+.about-section + h2 {
+  margin-top: 0;
+}
+
 .about-photo {
   padding: 0.75rem;
   background: #ffffff;
