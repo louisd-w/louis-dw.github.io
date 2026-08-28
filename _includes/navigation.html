@@ -1,13 +1,14 @@
-<header class="page-header" role="banner">
+<details class="banner-menu">
 
-  <h1 class="project-name">
-    {{ page.title | default: site.title | default: site.github.repository_name }}
-  </h1>
+  <summary aria-label="Open navigation menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </summary>
 
-  <h2 class="project-tagline">
-    {{ page.description | default: site.description | default: site.github.project_tagline }}
-  </h2>
+  <nav class="banner-menu-links" aria-label="Main navigation">
+    <a href="{{ '/' | relative_url }}">Home</a>
+    <a href="{{ '/contact' | relative_url }}">Contact Me</a>
+  </nav>
 
-  {% include navigation.html %}
-
-</header>
+</details>
