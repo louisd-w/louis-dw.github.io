@@ -1,11 +1,14 @@
 title: Louis Durston-Wyatt
+tagline: MMath at Durham University
 description: Undergraduate MMath student at Durham University
-theme: jekyll-theme-cayman
 
 url: "https://louisdw.xyz"
 baseurl: ""
+lang: en-GB
 
-logo: "/images/louis.JPEG"
+theme: jekyll-theme-cayman
+
+logo: "/assets/images/louis.JPEG"
 
 author:
   name: Louis Durston-Wyatt
@@ -15,7 +18,12 @@ social:
   links:
     - https://www.linkedin.com/in/louis-durston-wyatt-a529b03b7/
     - https://github.com/louisd-w
-    
+
+google_analytics: G-71LCJDTNQ1
+
+github:
+  is_project_page: false
+
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap

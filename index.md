@@ -1,15 +1,14 @@
 ---
 layout: default
 title: Louis Durston-Wyatt
-seo_title: Louis Durston-Wyatt | MMath at Durham University
 description: Undergraduate MMath student at Durham University
-image: /images/louis.JPEG
+image: /assets/images/louis.JPEG
 ---
 
 <div class="about-section">
 
   <div class="about-photo">
-    <img src="{{ './images/louis.JPEG' | relative_url }}"
+    <img src="{{ './assets/images/louis.JPEG' | relative_url }}"
          alt="Me">
   </div>
 
@@ -23,7 +22,7 @@ image: /images/louis.JPEG
  
 ## Academic Projects
 
-- [A Reasoning-led Approach to Teaching Fractions](./schools.pdf)
+- [A Reasoning-led Approach to Teaching Fractions](.assets/files/schools.pdf)
 - [Microbial Coexistence summer research project, TBC](./microbes)
 - [Dissertation Project, TBC](./diss)
 
