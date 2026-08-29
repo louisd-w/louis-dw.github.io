@@ -4,22 +4,20 @@ const ctx = canvas.getContext("2d");
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
 
-
-// parameters
-const a = 5;
-const b = 2;
-const c = 0.5;
-const d = 1;
-const phi = 1;
-const K = 10;
-const a_f = 1;
-const W_c = 1;
-const K_b = 1;
+// initial parameters
+let a = 5;
+let b = 2;
+let c = 0.5;
+let d = 1;
+let phi = 1;
+let K = 10;
+let a_f = 1;
+let W_c = 1;
+let K_b = 1;
 
 // limits
 const xmax = 6;
 const ymax = 6;
-
 
 // plot margins
 const leftMargin = 50;
@@ -30,7 +28,6 @@ const bottomMargin = 50;
 const plotWidth = canvasWidth - leftMargin - rightMargin;
 const plotHeight = canvasHeight - topMargin - bottomMargin;
 
-
 // model functions
 const mu = (M) => d + phi * c * M;
 const beta = (M) => (a * M) / (b + M) - (1 - phi) * c * M;
@@ -38,41 +35,42 @@ const U = (M) =>  a_f * M + (W_c * M) / (K_b + M);
 const U_prime = (M) =>  a_f + (W_c * K_b) / (K_b + M)**2;
 const S = (C, M) =>  C * (beta(M) * (1 - C / K) - mu(M));
 
-
 // Model M
 const F = (C, M) => S(C, M);
 const G = (C, M) => -U(M) * S(C, M) / (1 + C * U_prime(M));
 
-// lotka volterra
-//const F = (x, y) => x * (1 - y);
-//const G = (x, y) => y * (x - 1);
-
 // vector field grid
-const spacing = 0.3;
-const nx = Math.round(xmax / spacing);
-const ny = Math.round(ymax / spacing);
-const dx = xmax / nx;
-const dy = ymax / ny;
-const x_vals = linspace(dx / 2, xmax - dx / 2, nx);
-const y_vals = linspace(dy / 2, ymax - dy / 2, ny);
+    const spacing = 0.3;
+    const nx = Math.round(xmax / spacing);
+    const ny = Math.round(ymax / spacing);
+    const dx = xmax / nx;
+    const dy = ymax / ny;
+    const x_vals = linspace(dx / 2, xmax - dx / 2, nx);
+    const y_vals = linspace(dy / 2, ymax - dy / 2, ny);
 
+// initial plot
+drawPlot();
 
-//draw axes, ticks and labels
-resetDrawStyle();
-drawAxes("C", "M");
+//event listener for button
+document.getElementById("parameter-form").addEventListener("submit", function (event) {
 
-// draw vector field
-drawVectorField(F, G, x_vals, y_vals);
+    // stop form from submitting and refreshing the page
+    event.preventDefault();
 
-// draw nullclines
-// C
-setDashedStyle("blue", 4, [15, 10]); //[dashLength, gapLength]
-drawImplicitCurve(F);
-// M
-setSolidStyle("red", 2);
-drawImplicitCurve(G);
+    // get form data
+    const form = new FormData(event.currentTarget);
 
-drawLegend("C", "M");
+    // extract values from form and convert to numbers
+    const values = Object.fromEntries(
+        Array.from(form, ([name, value]) => [name, Number(value)])
+    );
+
+    // update parameters
+    ({a, b, c, d, phi, K, a_f, W_c, K_b} = values);
+
+    // redraw plot with new parameters
+    drawPlot();
+});
 
 //event listener for clicks
 canvas.addEventListener('click', function(event) {

@@ -123,7 +123,11 @@ function drawAxes(xLabel, yLabel) {
     const tickSize = 5;
     const tickSpacing = 0.5;
 
+    // style 
     resetDrawStyle();
+    ctx.save();
+    ctx.fillStyle = "black";
+    ctx.font = "10px Arial";
 
     // axes
     ctx.beginPath();
@@ -214,15 +218,19 @@ function drawLegend(xLabel, yLabel) {
     ctx.save();
 
     // background
-    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+    ctx.fillStyle = "rgb(255, 255, 255)";
     
     // border
     resetDrawStyle();
-    ctx.fillRect(x, y, width, height);
-    ctx.strokeRect(x, y, width, height);
+
+    // draw
+    ctx.beginPath();
+    ctx.roundRect(x, y, width, height, 16);
+    ctx.fill();
+    ctx.stroke();
 
     // text
-    ctx.font = "14px Arial";
+    ctx.font = "14px Helvetica, sans-serif";
     ctx.textAlign = "left";
     ctx.textBaseline = "middle";
 
@@ -251,6 +259,29 @@ function drawLegend(xLabel, yLabel) {
     ctx.fillText(yLabel + " nullcline", x + 60, y + 49);
 
     ctx.restore();
+}
+
+// draw the entire plot
+function drawPlot() {
+    // clear canvas
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    //draw axes, ticks and labels
+    resetDrawStyle();
+    drawAxes("C", "M");
+
+    // draw vector field
+    drawVectorField(F, G, x_vals, y_vals);
+
+    // draw nullclines
+    // C
+    setDashedStyle("blue", 4, [15, 10]); //[dashLength, gapLength]
+    drawImplicitCurve(F);
+    // M
+    setSolidStyle("red", 2);
+    drawImplicitCurve(G);
+
+    drawLegend("C", "M");
 }
 
 // drawing styles

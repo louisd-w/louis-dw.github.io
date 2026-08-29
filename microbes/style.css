@@ -1,0 +1,105 @@
+
+/* crosshair cursor for canvas */
+canvas {
+        cursor: crosshair;
+}
+
+/* column layout for plot and options */
+.columns {
+  display: grid;
+  grid-template-columns: 750px 1fr;
+  gap: 2.5rem;
+  align-items: stretch;
+  margin: 2rem 0 0;
+}
+.plot {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.12);
+}
+.options {
+  padding: 1rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* for mobile devices */
+@media screen and (max-width: 700px) {
+  .columns {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .plot {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
+/* font and color styles */
+body {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: Helvetica, sans-serif;
+    color: #263238;
+    background-color: #f7f9fa;
+    line-height: 1.6;
+}
+
+h1 {
+    color: #164e63;
+    font-size: 2.25rem;
+}
+
+h2 {
+    color: #0e7490;
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
+/* line underneath main heading */
+h1::after {
+    display: block;
+    width: 1100px;
+    height: 3px;
+    margin-top: 0.5rem;
+    background-color: #22a3b6;
+    content: "";
+}
+
+/* form styles (LLM)*/
+#parameter-form {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem 1rem;
+  align-items: center;
+}
+
+#parameter-form input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #b0bec5;
+  border-radius: 6px;
+  font: inherit;
+}
+
+#parameter-form button {
+  grid-column: 1 / -1;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 6px;
+  color: white;
+  background: #0e7490;
+  font: inherit;
+  cursor: pointer;
+}
+
+#parameter-form button:hover {
+  background: #164e63;
+}
