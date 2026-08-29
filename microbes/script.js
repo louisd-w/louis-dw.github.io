@@ -57,8 +57,50 @@ const x_vals = linspace(dx / 2, xmax - dx / 2, nx);
 const y_vals = linspace(dy / 2, ymax - dy / 2, ny);
 
 
-// draw
-drawVectorField(F, G, x_vals, y_vals);
-drawNullclines(F, G);
+//draw axes, ticks and labels
+resetDrawStyle();
 drawAxes("C", "M");
+
+// draw vector field
+drawVectorField(F, G, x_vals, y_vals);
+
+// draw nullclines
+// C
+setDashedStyle("blue", 4, [15, 10]); //[dashLength, gapLength]
+drawImplicitCurve(F);
+// M
+setSolidStyle("red", 2);
+drawImplicitCurve(G);
+
+drawLegend("C", "M");
+
+//event listener for clicks
+canvas.addEventListener('click', function(event) {
+try {
+
+    // get coordinates of click
+    const coords = getClickCoordinates(event);
+
+    // draw a small dot where clicked
+    ctx.fillStyle = 'lime';
+    ctx.beginPath();
+    ctx.arc(coords.x, coords.y, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // convert canvas coordinates to mathematical coordinates
+    const x0 = modelX(coords.x);
+    const y0 = modelY(coords.y);
+
+    // draw trajectory from clicked point
+    setSolidStyle("lime", 2);
+    drawTrajectory(F, G, x0, y0);
+    resetDrawStyle();
+
+    // redraw legend
+    drawLegend("C", "M");
+
+} catch (err) {
+    console.error('Error getting click coordinates:', err);
+}
+});
 
