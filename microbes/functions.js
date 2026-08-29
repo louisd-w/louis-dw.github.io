@@ -195,8 +195,6 @@ function drawAxes(xLabel, yLabel) {
         topMargin + plotHeight / 2
     );
 
-    ctx.rotate(-Math.PI / 2);
-
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
