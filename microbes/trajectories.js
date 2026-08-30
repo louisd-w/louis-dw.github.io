@@ -1,11 +1,18 @@
 // get click coordinates relative to canvas
 function getClickCoordinates(event) {
-    // get canvas position
+    // get canvas position and displayed size
     const rect = canvas.getBoundingClientRect();
 
-    // calculate mouse coordinates relative to canvas
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    // calculate mouse coordinates relative to canvas display
+    const displayX = event.clientX - rect.left;
+    const displayY = event.clientY - rect.top;
+
+    // scale to internal canvas resolution (accounts for CSS scaling)
+    const scaleX = canvasWidth / rect.width;
+    const scaleY = canvasHeight / rect.height;
+    
+    const x = displayX * scaleX;
+    const y = displayY * scaleY;
 
     // check if click is within the axes
     const isWithinPlot = x >= leftMargin && 
