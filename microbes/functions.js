@@ -1,3 +1,6 @@
+
+// -------------------------------- maths -----------------------------------------------------------------------------
+
 // MATLAB linspace in JS
 function linspace(start, end, n) {
 
@@ -22,6 +25,7 @@ function normalise(x, y) {
     return [x / L, y / L];
 }
 
+// -------------------------------- coordinates ----------------------------------------------------------------------
 // convert mathematical coordinates to canvas coordinates
 function canvasX(x) {
     return leftMargin + (x / xmax) * plotWidth;
@@ -38,6 +42,8 @@ function modelY(canvasPosition) {
     return (topMargin + plotHeight - canvasPosition) * ymax / plotHeight;
 }
 
+
+// -------------------------------- drawing ---------------------------------------------------------------------------
 // draw one arrow
 function drawArrow(x, y, dx, dy) {
 
@@ -63,23 +69,23 @@ function drawArrow(x, y, dx, dy) {
     ctx.lineTo(X2, Y2);
     ctx.stroke();
 
-    // arrow head (LLM)
+    // arrow head
     const angle = Math.atan2(Y2 - Y1, X2 - X1);
     const headLength = 5;
 
     ctx.beginPath();
 
-    ctx.moveTo(X2, Y2);
+    ctx.moveTo(X2, Y2); // end of shaft
 
     ctx.lineTo(
-        X2 - headLength * Math.cos(angle - Math.PI / 6),
+        X2 - headLength * Math.cos(angle - Math.PI / 6),    // left side of head
         Y2 - headLength * Math.sin(angle - Math.PI / 6)
     );
 
-    ctx.moveTo(X2, Y2);
+    ctx.moveTo(X2, Y2); // back to end of shaft
 
     ctx.lineTo(
-        X2 - headLength * Math.cos(angle + Math.PI / 6),
+        X2 - headLength * Math.cos(angle + Math.PI / 6),    // right side of head
         Y2 - headLength * Math.sin(angle + Math.PI / 6)
     );
 
@@ -274,12 +280,14 @@ function drawPlot() {
     drawVectorField(F, G, x_vals, y_vals);
 
     // draw nullclines
+    
     // C
     setDashedStyle("blue", 4, [15, 10]); //[dashLength, gapLength]
-    drawImplicitCurve(F);
+    drawImplicitCurveLLM(F);
+
     // M
     setSolidStyle("red", 2);
-    drawImplicitCurve(G);
+    drawImplicitCurveLLM(G);
 
     drawLegend("C", "M");
 }
@@ -301,223 +309,3 @@ function resetDrawStyle() {
     ctx.setLineDash([]);
 }
 
-// approximate f(x,y) = 0 using triangulation algorithm (LLM)
-function drawImplicitCurve(f) {
-    const meshDensity = 200;
-    const dx = xmax / meshDensity;
-    const dy = ymax / meshDensity;
-
-    const tolerance = 1e-10;
-
-    // Interpolate the point where f crosses zero
-    function zeroPoint(p1, p2) {
-        const denominator = p1.value - p2.value;
-        const t = Math.abs(denominator) < tolerance ? 0.5 : p1.value / denominator;
-        
-        return {
-            x: p1.x + t * (p2.x - p1.x),
-            y: p1.y + t * (p2.y - p1.y)
-        };
-    }
-
-    // Collect all segments as line endpoints
-    const segments = [];
-
-    // Draw the zero contour within one triangle
-    function drawTriangle(points) {
-        const intersections = [];
-
-        const edges = [
-            [points[0], points[1]],
-            [points[1], points[2]],
-            [points[2], points[0]]
-        ];
-
-        for (const [p1, p2] of edges) {
-            if (!Number.isFinite(p1.value) || !Number.isFinite(p2.value)) {
-                continue;
-            }
-
-            const abs1 = Math.abs(p1.value);
-            const abs2 = Math.abs(p2.value);
-
-            // Detect zero crossing with tolerance
-            const hasCrossing = (p1.value > tolerance && p2.value < -tolerance) ||
-                               (p1.value < -tolerance && p2.value > tolerance);
-            
-            // Or: one endpoint is near zero and the other is far
-            const p1NearZero = abs1 < tolerance;
-            const p2NearZero = abs2 < tolerance;
-            
-            if (hasCrossing || (p1NearZero && !p2NearZero) || (p2NearZero && !p1NearZero)) {
-                intersections.push(zeroPoint(p1, p2));
-            }
-        }
-
-        if (intersections.length >= 2) {
-            segments.push([
-                intersections[0],
-                intersections[1]
-            ]);
-        }
-    }
-
-    for (let i = 0; i < meshDensity; i++) {
-        for (let j = 0; j < meshDensity; j++) {
-            const x1 = i * dx;
-            const x2 = x1 + dx;
-            const y1 = j * dy;
-            const y2 = y1 + dy;
-
-            const bottomLeft = {
-                x: x1,
-                y: y1,
-                value: f(x1, y1)
-            };
-
-            const bottomRight = {
-                x: x2,
-                y: y1,
-                value: f(x2, y1)
-            };
-
-            const topRight = {
-                x: x2,
-                y: y2,
-                value: f(x2, y2)
-            };
-
-            const topLeft = {
-                x: x1,
-                y: y2,
-                value: f(x1, y2)
-            };
-
-            // Split each grid square into two triangles
-            drawTriangle([bottomLeft, bottomRight, topRight]);
-            drawTriangle([bottomLeft, topRight, topLeft]);
-        }
-    }
-
-    // Connect segments into curves and draw with dashing
-    const epsilon = 1e-6;
-    const used = new Set();
-    
-    function pointsClose(p1, p2) {
-        return Math.abs(p1.x - p2.x) < epsilon && Math.abs(p1.y - p2.y) < epsilon;
-    }
-
-    for (let i = 0; i < segments.length; i++) {
-        if (used.has(i)) continue;
-
-        // Start a new curve
-        ctx.beginPath();
-        const curve = segments[i];
-        ctx.moveTo(canvasX(curve[0].x), canvasY(curve[0].y));
-        ctx.lineTo(canvasX(curve[1].x), canvasY(curve[1].y));
-        used.add(i);
-
-        // Try to extend curve by connecting adjacent segments
-        let currentEnd = curve[1];
-        let found = true;
-
-        while (found) {
-            found = false;
-            for (let j = 0; j < segments.length; j++) {
-                if (used.has(j)) continue;
-
-                const seg = segments[j];
-                if (pointsClose(currentEnd, seg[0])) {
-                    ctx.lineTo(canvasX(seg[1].x), canvasY(seg[1].y));
-                    currentEnd = seg[1];
-                    used.add(j);
-                    found = true;
-                    break;
-                } else if (pointsClose(currentEnd, seg[1])) {
-                    ctx.lineTo(canvasX(seg[0].x), canvasY(seg[0].y));
-                    currentEnd = seg[0];
-                    used.add(j);
-                    found = true;
-                    break;
-                }
-            }
-        }
-
-        ctx.stroke();
-    }
-}
-
-// get click coordinates relative to canvas
-function getClickCoordinates(event) {
-    // get canvas position
-    const rect = canvas.getBoundingClientRect();
-
-    // calculate mouse coordinates relative to canvas
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    // check if click is within the axes
-    const isWithinPlot = x >= leftMargin && 
-                         x <= canvasWidth - rightMargin &&
-                         y >= topMargin && 
-                         y <= canvasHeight - bottomMargin;
-
-    if (!isWithinPlot) {
-        return; // ignore clicks outside
-    }
-    else{
-        return {x, y};
-    }
-}
-
-// rk4 step for system of 2 ODEs
-function rk4Step(F, G, x, y, dt) {
-    const k1x = F(x, y);
-    const k1y = G(x, y);
-
-    const k2x = F(x + 0.5 * dt * k1x, y + 0.5 * dt * k1y);
-    const k2y = G(x + 0.5 * dt * k1x, y + 0.5 * dt * k1y);
-
-    const k3x = F(x + 0.5 * dt * k2x, y + 0.5 * dt * k2y);
-    const k3y = G(x + 0.5 * dt * k2x, y + 0.5 * dt * k2y );
-
-    const k4x = F(x + dt * k3x, y + dt * k3y);
-    const k4y = G(x + dt * k3x, y + dt * k3y);
-
-    return {
-        x: x + dt * (k1x + 2 * k2x + 2 * k3x + k4x) / 6,
-        y: y + dt * (k1y + 2 * k2y + 2 * k3y + k4y) / 6
-    };
-}
-
-// draw trajectory from initial point (x0, y0)
-function drawTrajectory(F, G, x0, y0, dt = 0.01, steps = 5000) {
-    
-    let x = x0;
-    let y = y0;
-
-    ctx.beginPath();
-    ctx.moveTo(canvasX(x), canvasY(y));
-
-    for (let i = 0; i < steps; i++) {
-
-        // rk4 step
-        const next = rk4Step(F, G, x, y, dt);
-        x = next.x;
-        y = next.y;
-
-        // break early if trajectory goes out of bounds
-        if (
-            !Number.isFinite(x) ||
-            !Number.isFinite(y) ||
-            x < 0 || x > xmax ||
-            y < 0 || y  > ymax
-        ) {
-            break;
-        }
-
-        ctx.lineTo(canvasX(x), canvasY(y));
-    }
-
-    ctx.stroke();
-}

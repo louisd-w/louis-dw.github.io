@@ -1,21 +1,24 @@
-
 /* crosshair cursor for canvas */
 canvas {
         cursor: crosshair;
+        max-width: 100%;
+        height: auto;
+        display: block;
 }
 
 /* column layout for plot and options */
 .columns {
   display: grid;
-  grid-template-columns: 750px 1fr;
+  grid-template-columns: 1fr 350px;
   gap: 2.5rem;
-  align-items: stretch;
+  align-items: start;
   margin: 2rem 0 0;
 }
 .plot {
   background: #ffffff;
   border-radius: 16px;
   box-shadow: 0 20px 20px rgba(0, 0, 0, 0.12);
+  justify-self: center;
 }
 .options {
   padding: 1rem;
@@ -25,15 +28,14 @@ canvas {
 }
 
 /* for mobile devices */
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
   .columns {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
   .plot {
-    width: 95%;
-    margin: 0 auto;
+    width: 100%;
   }
 }
 
@@ -41,7 +43,7 @@ canvas {
 body {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0 2rem 2rem 2rem;
     font-family: Helvetica, sans-serif;
     color: #263238;
     background-color: #f7f9fa;
@@ -51,11 +53,13 @@ body {
 h1 {
     color: #164e63;
     font-size: 2.25rem;
+    margin-top: 0;
 }
 
 h2 {
     color: #0e7490;
     font-size: 1.5rem;
+    margin-top: 0;
 }
 
 p {
@@ -65,39 +69,42 @@ p {
 /* line underneath main heading */
 h1::after {
     display: block;
-    width: 1100px;
+    width: 100%;
     height: 3px;
     margin-top: 0.5rem;
     background-color: #22a3b6;
     content: "";
 }
 
-/* form styles (LLM)*/
+/* form styles */
+
 #parameter-form {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.75rem 1rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
   align-items: center;
 }
 
 #parameter-form input {
-  box-sizing: border-box;
-  width: 100%;
   padding: 0.5rem;
   border: 1px solid #b0bec5;
-  border-radius: 6px;
+  border-radius: 16px;
   font: inherit;
+  font-size: 0.75rem;
 }
 
 #parameter-form button {
-  grid-column: 1 / -1;
-  padding: 0.65rem 1rem;
+  padding: 0.5rem 1rem;
   border: 0;
-  border-radius: 6px;
+  border-radius: 16px;
   color: white;
   background: #0e7490;
   font: inherit;
   cursor: pointer;
+
+  /* centre button */
+  grid-column: 1 / -1;
+  justify-self: center;
 }
 
 #parameter-form button:hover {

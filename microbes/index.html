@@ -15,7 +15,7 @@
 <div class="columns">
 
   <div class="plot">
-    <canvas id="myCanvas" width="750" height="750"></canvas>
+    <canvas id="myCanvas" width="600" height="600"></canvas>
   </div>
 
   <div class="options">
@@ -23,31 +23,31 @@
 
     <form id="parameter-form">
       <label for="param-a">a</label>
-      <input id="param-a" name="a" type="number" value="5" required>
+      <input id="param-a" name="a" type="number" value="5" step = "any" required>
 
       <label for="param-b">b</label>
-      <input id="param-b" name="b" type="number" value="2" required>
+      <input id="param-b" name="b" type="number" value="2" step = "any" required>
 
       <label for="param-c">c</label>
-      <input id="param-c" name="c" type="number" value="0.5" required>
+      <input id="param-c" name="c" type="number" value="0.5" step = "any" required>
 
       <label for="param-d">d</label>
-      <input id="param-d" name="d" type="number" value="1" required>
+      <input id="param-d" name="d" type="number" value="1" step = "any" required>
 
       <label for="param-phi">phi</label>
-      <input id="param-phi" name="phi" type="number" value="1" min="0" max="1" required>
+      <input id="param-phi" name="phi" type="number" value="1" min="0" max="1" step = "any" required>
 
       <label for="param-K">K</label>
-      <input id="param-K" name="K" type="number" value="10" required>
+      <input id="param-K" name="K" type="number" value="10" step = "any" required>
 
       <label for="param-af">a_f</sub></label>
-      <input id="param-af" name="a_f" type="number" value="1" required>
+      <input id="param-af" name="a_f" type="number" value="1" step = "any" required>
 
       <label for="param-Wc">W_c</sub></label>
-      <input id="param-Wc" name="W_c" type="number" value="1" required>
+      <input id="param-Wc" name="W_c" type="number" value="1" step = "any" required>
 
       <label for="param-Kb">K_b</sub></label>
-      <input id="param-Kb" name="K_b" type="number" value="1" required>
+      <input id="param-Kb" name="K_b" type="number" value="1" step = "any" required>
 
       <button type="submit">Update Plot</button>
     </form>
@@ -58,6 +58,8 @@
 
 
 <script src="functions.js"></script>
+<script src="nullclines.js"></script>
+<script src="trajectories.js"></script>
 <script src="script.js"></script>
 
 </body>
