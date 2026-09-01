@@ -1,13 +1,8 @@
 
-/* remove annoying white space "bounce" */
-body {
-    overscroll-behavior: none;
-}
-
 /* crosshair cursor for canvas */
 canvas {
   cursor: crosshair;
-  max-width: 100%;
+  width: 100%;
   height: auto;
   display: block;
 }
@@ -25,7 +20,6 @@ canvas {
 /* individual plot and options box styles */
 .plot {
   flex: 1 1 350px;
-  max-width: 600px;
   background: #ffffff;
   border-radius: 16px;
   box-shadow: 0 20px 20px rgba(0, 0, 0, 0.12);
@@ -45,11 +39,12 @@ canvas {
 body {
   max-width: 100vw;
   margin: 0 auto;
-  padding: 0 2rem 2rem 2rem;
+  padding: 0 2rem;
   font-family: Helvetica, sans-serif;
   color: #263238;
   background-color: #f7f9fa;
   line-height: 1.6;
+  overscroll-behavior: none; /* remove annoying white space "bounce" */
 }
 
 h1 {
