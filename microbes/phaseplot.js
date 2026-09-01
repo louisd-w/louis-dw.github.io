@@ -1,10 +1,129 @@
+// draw one arrow
+function drawArrow(x, y, dx, dy) {
+
+    //hard-code phase plot
+    const plot = plots.phase;
+
+    const arrowLength = 0.5 * spacing;
+
+    // centre arrow on grid point
+    const x1 = x - 0.5 * arrowLength * dx;
+    const y1 = y - 0.5 * arrowLength * dy;
+
+    const x2 = x + 0.5 * arrowLength * dx;
+    const y2 = y + 0.5 * arrowLength * dy;
+
+    // convert to canvas coordinates
+    const X1 = canvasX(x1, plot);
+    const Y1 = canvasY(y1, plot);
+
+    const X2 = canvasX(x2, plot);
+    const Y2 = canvasY(y2, plot);
+
+    // arrow shaft
+    plot.ctx.beginPath();
+    plot.ctx.moveTo(X1, Y1);
+    plot.ctx.lineTo(X2, Y2);
+    plot.ctx.stroke();
+
+    // arrow head
+    const angle = Math.atan2(Y2 - Y1, X2 - X1);
+    const headLength = 5;
+
+    plot.ctx.beginPath();
+
+    plot.ctx.moveTo(X2, Y2); // end of shaft
+
+    plot.ctx.lineTo(
+        X2 - headLength * Math.cos(angle - Math.PI / 6),    // left side of head
+        Y2 - headLength * Math.sin(angle - Math.PI / 6)
+    );
+
+    plot.ctx.moveTo(X2, Y2); // back to end of shaft
+
+    plot.ctx.lineTo(
+        X2 - headLength * Math.cos(angle + Math.PI / 6),    // right side of head
+        Y2 - headLength * Math.sin(angle + Math.PI / 6)
+    );
+
+    plot.ctx.stroke();
+}
+
+// draw vector field
+function drawVectorField(F, G, x_vals, y_vals) {
+
+    //hard-code phase plot
+    const plot = plots.phase;
+
+    plot.ctx.strokeStyle = "#444";
+    plot.ctx.lineWidth = 1;
+
+    for (let i = 0; i < x_vals.length; i++) {
+
+        for (let j = 0; j < y_vals.length; j++) {
+
+            const x = x_vals[i];
+            const y = y_vals[j];
+
+            // evaluate vector field
+            let dx = F(x, y);
+            let dy = G(x, y);
+
+            // normalise
+            [dx, dy] = normalise(dx, dy);
+
+            // don't draw zero vectors
+            if (dx !== 0 || dy !== 0) {
+                drawArrow(x, y, dx, dy, plot);
+            }
+        }
+    }
+
+    plot.ctx.strokeStyle = "#444";
+    plot.ctx.lineWidth = 1;
+}
+
+// draw the entire plot
+function drawPhasePlot() {
+
+    //hard-code phase plot
+    const plot = plots.phase;
+
+    // clear phaseCanvas
+    plot.ctx.clearRect(0, 0, plot.canvas.width, plot.canvas.height);
+
+    //draw axes, ticks and labels
+    resetDrawStyle(plot);
+    drawAxes("C", "M", plot);
+
+    // draw vector field
+    drawVectorField(F, G, x_vals, y_vals, plot);
+
+    // draw nullclines
+    
+    // C
+    setDashedStyle("blue", 4, [15, 10], plot); //[dashLength, gapLength]
+    drawImplicitCurveLLM(F, 500, plot);
+
+    // M
+    setSolidStyle("red", 2, plot);
+    drawImplicitCurveLLM(G, 500, plot);
+
+    drawLegend("C nullcline", "M nullcline", plot);
+}
+
+// nuclines ----------------------------------------------------------------------------------------------------------------
 
 //draw line between two points
 function drawLine(x1, y1, x2, y2) {
-    ctx.beginPath();
-    ctx.moveTo(canvasX(x1), canvasY(y1));
-    ctx.lineTo(canvasX(x2), canvasY(y2));
-    ctx.stroke();
+
+    //hard-code phase plot
+    const plot = plots.phase;
+
+    plot.ctx.beginPath();
+    plot.ctx.moveTo(canvasX(x1, plot), canvasY(y1, plot));
+    plot.ctx.lineTo(canvasX(x2, plot), canvasY(y2, plot));
+    plot.ctx.stroke();
 }
 
 // interpolate to find zero crossing on an edge
@@ -19,11 +138,14 @@ function interpolateZeroCrossing(p1, f1, p2, f2) {
 // approximate f(x,y) = 0 using marching squares
 function drawImplicitCurve(F, meshDensity = 500){
 
+    //hard-code phase plot
+    const plot = plots.phase;
+
     // meshDensity: number of squares along each axis
 
     // create a grid and return each square as four corner points
-    const xGrid = linspace(0, xmax, meshDensity + 1);
-    const yGrid = linspace(0, ymax, meshDensity + 1);
+    const xGrid = linspace(0, plot.xmax, meshDensity + 1);
+    const yGrid = linspace(0, plot.ymax, meshDensity + 1);
     const squares = [];
 
     for (let i = 0; i < meshDensity; i++) {
@@ -73,13 +195,13 @@ function drawImplicitCurve(F, meshDensity = 500){
         // if there are exactly two intersections, draw a line between them
         if (intersections.length === 2) {
             const [int1, int2] = intersections;
-            drawLine(int1.x, int1.y, int2.x, int2.y);
+            drawLine(int1.x, int1.y, int2.x, int2.y, plot);
         }
 
         // if there are four intersections, draw lines between the midpoints of opposite edges
         if (intersections.length === 4) {
             const [int1, int2, int3, int4] = intersections;
-            drawLine(int1.x, int1.y, int3.x, int3.y);
+            drawLine(int1.x, int1.y, int3.x, int3.y, plot);
         }
     }
 }
@@ -87,9 +209,12 @@ function drawImplicitCurve(F, meshDensity = 500){
 // approximate f(x,y) = 0 using marching squares (LLM -- dashed lines work)
 function drawImplicitCurveLLM(f, meshDensity = 500) {
 
+    //hard-code phase plot
+    const plot = plots.phase;
+
     // Width and height of each grid square
-    const dx = xmax / meshDensity;
-    const dy = ymax / meshDensity;
+    const dx = plot.xmax / meshDensity;
+    const dy = plot.ymax / meshDensity;
 
     // Values smaller than this are treated as zero
     const tolerance = 1e-10;
@@ -333,16 +458,16 @@ function drawImplicitCurveLLM(f, meshDensity = 500) {
 
         const firstSegment = segments[i];
 
-        ctx.beginPath();
+        plot.ctx.beginPath();
 
-        ctx.moveTo(
-            canvasX(firstSegment[0].x),
-            canvasY(firstSegment[0].y)
+        plot.ctx.moveTo(
+            canvasX(firstSegment[0].x, plot),
+            canvasY(firstSegment[0].y, plot)
         );
 
-        ctx.lineTo(
-            canvasX(firstSegment[1].x),
-            canvasY(firstSegment[1].y)
+        plot.ctx.lineTo(
+            canvasX(firstSegment[1].x, plot),
+            canvasY(firstSegment[1].y, plot)
         );
 
         used.add(i);
@@ -366,9 +491,9 @@ function drawImplicitCurveLLM(f, meshDensity = 500) {
                  * current endpoint, so draw towards its second endpoint.
                  */
                 if (pointsClose(currentEnd, nextSegment[0])) {
-                    ctx.lineTo(
-                        canvasX(nextSegment[1].x),
-                        canvasY(nextSegment[1].y)
+                    plot.ctx.lineTo(
+                        canvasX(nextSegment[1].x, plot),
+                        canvasY(nextSegment[1].y, plot)
                     );
 
                     currentEnd = nextSegment[1];
@@ -382,9 +507,9 @@ function drawImplicitCurveLLM(f, meshDensity = 500) {
                  * the segment in the opposite direction.
                  */
                 if (pointsClose(currentEnd, nextSegment[1])) {
-                    ctx.lineTo(
-                        canvasX(nextSegment[0].x),
-                        canvasY(nextSegment[0].y)
+                    plot.ctx.lineTo(
+                        canvasX(nextSegment[0].x, plot),
+                        canvasY(nextSegment[0].y, plot)
                     );
 
                     currentEnd = nextSegment[0];
@@ -395,6 +520,7 @@ function drawImplicitCurveLLM(f, meshDensity = 500) {
             }
         }
 
-        ctx.stroke();
+        plot.ctx.stroke();
     }
 }
+

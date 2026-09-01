@@ -8,15 +8,21 @@
 
 
 <body>
+  
 <h1>Model M Phase Plane</h1>
-<p>Click initial point to draw trajectory, change parameters to investigate the system. Click here for the <a href="https://github.com/louisd-w/louis-dw.github.io/tree/main/microbes">Github Page</a>.</p>
+<p>Click initial point to draw trajectory and see time plot. Change parameters to investigate the system. Click here for the <a href="https://github.com/louisd-w/louis-dw.github.io/tree/main/microbes">Github Page</a>.</p>
 
 
 
-<div class="columns">
+<div class="container">
 
   <div class="plot">
-    <canvas id="myCanvas" width="600" height="600"></canvas>
+    <h2>Phase Plane</h2>
+    <canvas id="phaseCanvas" width="600" height="600"></canvas>
+  </div>
+  <div class="plot">
+    <h2>Time Plot</h2>
+    <canvas id="timeCanvas" width="600" height="600"></canvas>
   </div>
 
   <div class="options">
@@ -57,9 +63,9 @@
 
  </div>
 
-
 <script src="functions.js"></script>
-<script src="nullclines.js"></script>
+<script src="phaseplot.js"></script>
+<script src="timeplot.js"></script>
 <script src="trajectories.js"></script>
 <script src="script.js"></script>
 
