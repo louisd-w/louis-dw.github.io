@@ -99,6 +99,7 @@ document.getElementById("parameter-form").addEventListener("submit", function (e
     // redraw plots with new parameters
     drawPhasePlot();
     drawTimePlot();
+    drawLegend("C", "M", plots.time);
 });
 
 // event listener for clicks
