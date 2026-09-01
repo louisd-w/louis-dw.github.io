@@ -27,7 +27,6 @@ canvas {
 
 .options {
   flex: 0 1 auto;
-  width: fit-content;
   padding: 1rem;
   background: #ffffff;
   border-radius: 16px;
