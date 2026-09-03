@@ -97,6 +97,9 @@ function setupTimePlotHover() {
         plots.time.ctx.textBaseline = "middle";
         plots.time.ctx.fillText(timeLabel, boxX + boxWidth / 2, boxY + boxHeight / 2);
         plots.time.ctx.restore();
+
+        // redraw legend above hover line and dots
+        drawLegend("C", "M", plots.time);
     });
 
     // remove hover graphics when mouse leaves the plot
