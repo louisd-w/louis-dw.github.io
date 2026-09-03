@@ -1,35 +1,35 @@
-// get click coordinates relative to a plot canvas
-function getClickCoordinates(event, plot) {
-    const canvas = plot.canvas;
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
-    
-    // get canvas position and displayed size
-    const rect = canvas.getBoundingClientRect();
+// most recently drawn trajectory
+let currentTrajectory = null;
 
-    // calculate mouse coordinates relative to canvas display
-    const displayX = event.clientX - rect.left;
-    const displayY = event.clientY - rect.top;
+function setupClicks(){
+    // event listener for clicks
+    phaseCanvas.addEventListener('click', function(event) {
+    try {
 
-    // scale to internal canvas resolution (accounts for CSS scaling)
-    const scaleX = canvasWidth / rect.width;
-    const scaleY = canvasHeight / rect.height;
-    
-    const x = displayX * scaleX;
-    const y = displayY * scaleY;
+        // get coordinates of click
+        const coords = getMouseCoordinates(event, plots.phase);
 
-    // check if click is within the axes
-    const isWithinPlot = x >= plot.leftMargin && 
-                         x <= canvasWidth - plot.rightMargin &&
-                         y >= plot.topMargin && 
-                         y <= canvasHeight - plot.bottomMargin;
+        // draw a small dot where clicked
+        plots.phase.ctx.fillStyle = 'lime';
+        plots.phase.ctx.beginPath();
+        plots.phase.ctx.arc(coords.x, coords.y, 5, 0, Math.PI * 2);
+        plots.phase.ctx.fill();
 
-    if (!isWithinPlot) {
-        return; // ignore clicks outside
+        // convert phaseCanvas coordinates to mathematical coordinates
+        const x0 = modelX(coords.x, plots.phase);
+        const y0 = modelY(coords.y, plots.phase);
+
+        // draw trajectory from clicked point, and add to time plot
+        drawTrajectory(F, G, x0, y0);
+
+        // redraw legends
+        drawLegend("C nullcline", "M nullcline", plots.phase);
+        drawLegend("C", "M", plots.time);
+
+    } catch (err) {
+        console.error('Error getting click coordinates:', err);
     }
-    else{
-        return {x, y};
-    }
+    });
 }
 
 // rk4 step for system of 2 ODEs
@@ -64,6 +64,10 @@ function drawTrajectory(F, G, x0, y0, dt = 0.01, steps = 5000) {
     plots.phase.ctx.beginPath();
     plots.phase.ctx.moveTo(canvasX(x[0], plots.phase), canvasY(y[0], plots.phase));
 
+    // for stopped trajectories
+    let settledSteps = 0;
+    const settlingTolerance = 1e-4;
+    const requiredSettledSteps = 50;
 
     // integrate
     for (let i = 0; i < steps; i++) {
@@ -71,8 +75,13 @@ function drawTrajectory(F, G, x0, y0, dt = 0.01, steps = 5000) {
         // rk4 step
         const next = rk4Step(F, G, x[x.length - 1], y[y.length - 1], dt);
 
-        // stop if the trajectory blows up or leaves the phase plot
-        if (next.x < 0 || next.x > plots.phase.xmax || next.y < 0 || next.y > plots.phase.ymax) {
+        // stop if the numerical solution becomes invalid or unreasonably large
+        if (
+            !Number.isFinite(next.x) ||
+            !Number.isFinite(next.y) ||
+            Math.abs(next.x) > 1e6 ||
+            Math.abs(next.y) > 1e6
+        ) {
             break;
         }
 
@@ -81,10 +90,27 @@ function drawTrajectory(F, G, x0, y0, dt = 0.01, steps = 5000) {
         y.push(next.y);
         t.push(t[t.length - 1] + dt);
 
+        // check whether the trajectory has remained close to equilibrium
+        const speed = Math.hypot(
+            F(next.x, next.y),
+            G(next.x, next.y)
+        );
+        if (speed < settlingTolerance) {
+            settledSteps++;
+        } else {
+            settledSteps = 0;
+        }
+        if (settledSteps >= requiredSettledSteps) {
+            break;
+        }
+
         // draw trajectory on phase plot
         plots.phase.ctx.lineTo(canvasX(x[x.length - 1], plots.phase), canvasY(y[y.length - 1], plots.phase));
 
     }
+
+    // save current trajectory for other plots
+    currentTrajectory = {t, x, y};
 
     //reset time plot and scale the axes
     plots.time.xmax = t[t.length - 1];

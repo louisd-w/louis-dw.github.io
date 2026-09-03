@@ -49,6 +49,18 @@ function drawArrow(x, y, dx, dy) {
     plot.ctx.stroke();
 }
 
+// update vector field
+function updateVectorFieldGrid(gridSize) {
+    const dx = plots.phase.xmax / gridSize;
+    const dy = plots.phase.ymax / gridSize;
+
+    // used to determine the arrow length
+    spacing = Math.min(dx, dy);
+
+    x_vals = linspace(dx/2, plots.phase.xmax - dx/2, gridSize);
+    y_vals = linspace(dy/2, plots.phase.ymax - dy/2, gridSize);
+}
+
 // draw vector field
 function drawVectorField(F, G, x_vals, y_vals) {
 

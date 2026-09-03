@@ -18,11 +18,39 @@ function resetDrawStyle(plot) {
     plot.ctx.setLineDash([]);
 }
 
+// to make ticks nice
+function niceTickSpacing(max, numberOfIntervals = 10) {
+    const roughSpacing = max / numberOfIntervals;
+    const magnitude = 10 ** Math.floor(Math.log10(roughSpacing));
+    const normalized = roughSpacing / magnitude;
+
+    let niceNumber;
+
+    if (normalized <= 1) {
+        niceNumber = 1;
+    } else if (normalized <= 2) {
+        niceNumber = 2;
+    } else if (normalized <= 5) {
+        niceNumber = 5;
+    } else {
+        niceNumber = 10;
+    }
+
+    return niceNumber * magnitude;
+}
+
 // draw axes, ticks and labels
 function drawAxes(xLabel, yLabel, plot) {
 
-    const tickSize = 5;
-    const tickSpacing = 0.5;
+    let tickSize = 5;
+    let xTickSpacing = 0.5;
+    let yTickSpacing = 0.5;
+
+    // adjust scaling for time plot
+    if (plot === plots.time) {
+        xTickSpacing = niceTickSpacing(plot.xmax);
+        yTickSpacing = niceTickSpacing(plot.ymax);
+    }
 
     // style 
     resetDrawStyle(plot);
@@ -45,7 +73,7 @@ function drawAxes(xLabel, yLabel, plot) {
 
 
     // x ticks
-    for (let x = 0; x <= plot.xmax + 1e-10; x += tickSpacing) {
+    for (let x = 0; x <= plot.xmax + 1e-10; x += xTickSpacing) {
 
         const X = canvasX(x, plot);
         const Y = canvasY(0, plot);
@@ -59,10 +87,11 @@ function drawAxes(xLabel, yLabel, plot) {
         plot.ctx.textBaseline = "top";
         plot.ctx.fillText(Number(x.toFixed(10)), X, Y + 8);
     }
+    
 
 
     // y ticks
-    for (let y = 0; y <= plot.ymax + 1e-10; y += tickSpacing) {
+    for (let y = 0; y <= plot.ymax + 1e-10; y += yTickSpacing) {
 
         const X = canvasX(0, plot);
         const Y = canvasY(y, plot);
@@ -204,4 +233,38 @@ function modelX(canvasPosition, plot) {
 }
 function modelY(canvasPosition, plot) {
     return (plot.topMargin + plot.plotHeight - canvasPosition) * plot.ymax / plot.plotHeight;
+}
+
+// get mouse coordinates relative to a plot canvas
+function getMouseCoordinates(event, plot) {
+    const canvas = plot.canvas;
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+    
+    // get canvas position and displayed size
+    const rect = canvas.getBoundingClientRect();
+
+    // calculate mouse coordinates relative to canvas display
+    const displayX = event.clientX - rect.left;
+    const displayY = event.clientY - rect.top;
+
+    // scale to internal canvas resolution (accounts for CSS scaling)
+    const scaleX = canvasWidth / rect.width;
+    const scaleY = canvasHeight / rect.height;
+    
+    const x = displayX * scaleX;
+    const y = displayY * scaleY;
+
+    // check if click is within the axes
+    const isWithinPlot = x >= plot.leftMargin && 
+                         x <= canvasWidth - plot.rightMargin &&
+                         y >= plot.topMargin && 
+                         y <= canvasHeight - plot.bottomMargin;
+
+    if (!isWithinPlot) {
+        return; // ignore clicks outside
+    }
+    else{
+        return {x, y};
+    }
 }
