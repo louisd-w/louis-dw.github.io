@@ -20,6 +20,7 @@
   align-items: start;
   justify-content: center;
   margin: 1rem;
+  margin-top: 0;
 }
 
 /* individual plot and options box styles */
@@ -54,6 +55,7 @@ body {
 h1 {
   color: #00869b;
   font-size: 2.25rem;
+  margin-bottom: 0.5rem;
   margin-top: 1rem;
 }
 
@@ -72,7 +74,7 @@ h2 {
 
 body > p {
   font-size: 1rem;
-  margin: 0.25rem 0 0;
+  margin: 0.25rem 0 1rem;
 }
 
 /* line underneath main heading */
@@ -80,6 +82,7 @@ h1::after {
   display: block;
   width: 100%;
   height: 3px;
+  margin-bottom: 1rem;
   margin-top: 0.5rem;
   background-color: #00869b;
   content: "";
